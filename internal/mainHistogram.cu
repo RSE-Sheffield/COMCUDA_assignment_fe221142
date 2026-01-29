@@ -184,6 +184,17 @@ void runHistogram(int argc, char** argv, const Implementation implementation) {
         printf("Using input file: %s%s%s\n", CONSOLE_YELLOW, config.input_file, CONSOLE_RESET);
         loadCSV(config.input_file, reinterpret_cast<void**>(&input_buffer), &input_buffer_elements, "%d", sizeof(int));
         printf("Input has length: %s%u%s\n", CONSOLE_YELLOW, static_cast<unsigned int>(input_buffer_elements), CONSOLE_RESET);
+        // Check for CSV values out of bounds
+        unsigned int badCount = 0;
+        for (unsigned int i = 0; i < input_buffer_elements; ++i) {
+            if (input_buffer[i] > HISTOGRAM_MAX_VALUE || input_buffer[i] < 0) {
+                ++badCount;
+            }
+        }
+        if (badCount) {
+            printf(CONSOLE_RED "Input %s is unsupported, it contains %u elements outside the inclusive range [0, %d].\n" CONSOLE_RESET, config.input_file, badCount, HISTOGRAM_MAX_VALUE);
+            exit(EXIT_FAILURE);
+        }
     } else {
         // Random init
         if (!config.random_seed) {
