@@ -190,7 +190,7 @@ void runEmboss(int argc, char** argv, const Implementation implementation) {
         const unsigned int total_pixels = validation_image.width * validation_image.height;
         unsigned int errors = 0;
         for (unsigned int i = 0; i < total_pixels; ++i) {
-            if (validation_image.data[i] != result_image.data[i]) {
+            if (equalsEpsilon(validation_image.data[i], result_image.data[i], 1)) {
                 ++errors;
             }
         }

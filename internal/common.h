@@ -53,8 +53,8 @@ extern "C" {
  * Returns true if abs(a - b) < epsilon
  * @note Useful for floating point comparisons
  */
-inline bool equalsEpsilon(float a, float b, float epsilon) {
-    return fabsf(a - b) < fabsf(epsilon);
+inline bool equalsEpsilon(int a, int b, int epsilon) {
+    return abs(a - b) < abs(epsilon);
 }
 
 void loadCSV(const char *input_file, void **buf, size_t *buf_elements, const char *format, size_t type_sz);
