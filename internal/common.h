@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 #include "config.h"
 /**
@@ -50,11 +51,11 @@ typedef struct Image Image;
 extern "C" {
 #endif
 /**
- * Returns true if abs(a - b) < epsilon
- * @note Useful for floating point comparisons
+ * Returns true if abs(a - b) <= epsilon
+ * @note Useful for integer point comparisons
  */
 inline bool equalsEpsilon(int a, int b, int epsilon) {
-    return abs(a - b) < abs(epsilon);
+    return abs(a - b) <= abs(epsilon);
 }
 
 void loadCSV(const char *input_file, void **buf, size_t *buf_elements, const char *format, size_t type_sz);
