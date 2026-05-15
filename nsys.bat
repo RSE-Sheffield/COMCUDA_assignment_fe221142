@@ -11,4 +11,4 @@ IF "%1"=="" (
 	pause
 	goto :eof
 )
-%nsight-systems% profile --trace=cuda --sample=process-tree,nvtx --cpuctxsw=process-tree -o nsys_report %*
+%nsight-systems% profile --trace=cuda --sample=none -o nsys_report %*
